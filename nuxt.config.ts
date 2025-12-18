@@ -43,7 +43,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBase: process.env.VUE_APP_API_URL || 'http://localhost:3000'
+      apiBase: process.env.VUE_APP_API_URL || 'https://ifit-mx12.onrender.com'
     }
   }
 })
