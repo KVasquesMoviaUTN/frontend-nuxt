@@ -113,7 +113,7 @@ export default {
 
 	watch: {
 		inputString(newValue) {
-			this.$emit('update-string', newValue)
+			this.updateString();
 		},
 	},
 

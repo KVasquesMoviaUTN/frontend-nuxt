@@ -10,9 +10,19 @@
 			</ClientOnly>
 		</div>
 
-		<h1 class="my-6 text-center text-3xl lg:text-5xl font-bold tracking-wider text-primary font-serif">
-			PRODUCTOS SALUDABLES
-		</h1>
+		<template v-if="!inputString">
+			<!-- Hero Section -->
+			<HeroSection />
+
+			<!-- Trust Signals -->
+			<TrustSignals />
+		</template>
+
+		<div id="productos" class="pt-10 scroll-mt-24">
+			<h1 class="my-6 text-center text-3xl lg:text-5xl font-bold tracking-wider text-primary font-serif">
+				NUESTROS PRODUCTOS
+			</h1>
+		</div>
 
 		<template v-if="inputString == '' && newProducts.length > 0">
 			<h2

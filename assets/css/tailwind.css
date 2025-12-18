@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 /* Add any custom global styles here if needed */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply bg-background text-text font-sans;
 }

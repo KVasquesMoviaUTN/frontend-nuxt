@@ -135,6 +135,7 @@ const emit = defineEmits(['product-saved']);
 
 const configRuntime = useRuntimeConfig();
 const apiBase = configRuntime.public.apiBase;
+const authStore = useAuthStore();
 
 const name = ref('');
 const price = ref('');
@@ -171,25 +172,21 @@ const imagePreview = ref(null);
 const uploading = ref(false);
 const uploadError = ref(null);
 
-watch(() => props.product, (newProduct) => {
-	if (newProduct) {
-		name.value = newProduct.name;
-		price.value = newProduct.price;
-		purchase_price.value = newProduct.purchase_price;
-		description.value = newProduct.description;
-		stock.value = newProduct.stock;
-		unidad_venta.value = newProduct.unidad_venta;
-		unidad.value = newProduct.unidad;
-		category.value = newProduct.category || '';
-		informacion_nutricional.value = newProduct.informacion_nutricional || '';
-		image.value = newProduct.image || '';
-		if (image.value) {
-			imagePreview.value = `https://res.cloudinary.com/daid9xytm/image/upload/q_auto:good,f_auto,dpr_2.0,c_limit,h_224/v1740248697/${image.value}.webp`;
-		}
-	} else {
-		resetForm();
-	}
-}, { immediate: true });
+function resetForm() {
+	name.value = '';
+	price.value = '';
+	purchase_price.value = '';
+	description.value = '';
+	stock.value = '';
+	unidad_venta.value = '';
+	unidad.value = '';
+	category.value = '';
+	informacion_nutricional.value = '';
+	image.value = '';
+	imagePreview.value = null;
+}
+
+
 
 const handleFileUpload = async (event) => {
 	const file = event.target.files[0];
@@ -204,7 +201,10 @@ const handleFileUpload = async (event) => {
 	try {
 		const response = await $fetch(`${apiBase}/upload/file`, {
 			method: 'POST',
-			body: formData
+			body: formData,
+			headers: {
+				Authorization: `Bearer ${authStore.token}`
+			}
 		});
 
 		image.value = response.public_id;
@@ -241,12 +241,18 @@ const handleSubmit = async () => {
 		if (props.product) {
 			await $fetch(`${apiBase}/products/${props.product.id}`, {
 				method: 'PUT',
-				body: productData
+				body: productData,
+				headers: {
+					Authorization: `Bearer ${authStore.token}`
+				}
 			});
 		} else {
 			await $fetch(`${apiBase}/products`, {
 				method: 'POST',
-				body: productData
+				body: productData,
+				headers: {
+					Authorization: `Bearer ${authStore.token}`
+				}
 			});
 		}
 		emit('product-saved');
@@ -257,17 +263,25 @@ const handleSubmit = async () => {
 	}
 };
 
-const resetForm = () => {
-	name.value = '';
-	price.value = '';
-	purchase_price.value = '';
-	description.value = '';
-	stock.value = '';
-	unidad_venta.value = '';
-	unidad.value = '';
-	category.value = '';
-	informacion_nutricional.value = '';
-	image.value = '';
-	imagePreview.value = null;
-};
+
+
+watch(() => props.product, (newProduct) => {
+	if (newProduct) {
+		name.value = newProduct.name;
+		price.value = newProduct.price;
+		purchase_price.value = newProduct.purchase_price;
+		description.value = newProduct.description;
+		stock.value = newProduct.stock;
+		unidad_venta.value = newProduct.unidad_venta;
+		unidad.value = newProduct.unidad;
+		category.value = newProduct.category || '';
+		informacion_nutricional.value = newProduct.informacion_nutricional || '';
+		image.value = newProduct.image || '';
+		if (image.value) {
+			imagePreview.value = `https://res.cloudinary.com/daid9xytm/image/upload/q_auto:good,f_auto,dpr_2.0,c_limit,h_224/v1740248697/${image.value}.webp`;
+		}
+	} else {
+		resetForm();
+	}
+}, { immediate: true });
 </script>
