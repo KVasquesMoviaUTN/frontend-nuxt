@@ -57,8 +57,8 @@
 		<h2
 			class="my-2 ml-2 text-left text-xl font-bold tracking-wide text-primary lg:mx-[88px] lg:my-6 lg:text-3xl font-serif border-b-2 border-secondary/30 pb-2 w-fit">
 			Todos los Productos 🛒</h2>
-		<div v-if="isLoading" class="loading-overlay my-20 flex justify-center">
-			<div class="spinner border-primary"></div>
+		<div v-if="isLoading" class="grid grid-cols-2 md:grid-cols-3 lg:mx-20 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-10">
+			<SkeletonProductCard v-for="n in 10" :key="n" />
 		</div>
 		<div v-else class="grid grid-cols-2 md:grid-cols-3 lg:mx-20 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-10">
 			<ProductCard :config="config" :key="product.id" :product="product" @add-to-cart="addToCart" :select-id-prefix="'cantidad'"

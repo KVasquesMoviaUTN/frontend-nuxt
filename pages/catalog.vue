@@ -107,6 +107,10 @@ useHead({
 	],
 });
 
+definePageMeta({
+	middleware: 'auth'
+});
+
 const configRuntime = useRuntimeConfig();
 const apiBase = configRuntime.public.apiBase;
 
