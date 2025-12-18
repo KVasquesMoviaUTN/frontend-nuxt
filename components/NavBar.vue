@@ -40,17 +40,28 @@
 			<div class="flex items-center gap-4">
 				<ClientOnly>
 					<div class="flex flex-row items-center text-white font-medium">
-						<NuxtLink v-if="user && user.role === 'admin'" to="/admin/sales" class="mr-4 hover:text-secondary transition-colors hidden lg:block">
+						<NuxtLink v-if="user && user.role === 'admin'" to="/admin/sales"
+							class="mr-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 hover:border-white/40 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all duration-300 text-sm font-medium hidden lg:block">
 							Registrar Venta
 						</NuxtLink>
-						<NuxtLink v-if="user && user.role === 'admin'" to="/admin/statistics" class="mr-4 hover:text-secondary transition-colors hidden lg:block">
+						<NuxtLink v-if="user && user.role === 'admin'" to="/admin/statistics"
+							class="mr-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 hover:border-white/40 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all duration-300 text-sm font-medium hidden lg:block">
 							Mostrar Estadísticas
 						</NuxtLink>
-						<NuxtLink to="/login" class="hover:opacity-80 transition-opacity flex items-center">
-							<span v-if="!user" class="mr-2 text-sm lg:text-base">Iniciar Sesión</span>
-							<span v-else class="mr-2 text-sm lg:text-base">Hola, {{ user.name }}</span>
-							<img :src="`https://res.cloudinary.com/daid9xytm/image/upload/q_auto:good,f_auto,dpr_2.0,c_limit,h_96/v1740248697/user_njnkfl.png`"
-								class="h-9 w-9 lg:h-10 lg:w-10 rounded-full invert" type="image/webp" loading="lazy" alt="Usuario">
+						<NuxtLink to="/login"
+							class="flex items-center gap-3 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 hover:border-white/40 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all duration-300 group">
+							<div class="flex flex-col items-end">
+								<span v-if="!user" class="text-sm font-medium leading-none tracking-wide">Iniciar Sesión</span>
+								<div v-else class="flex flex-col items-end">
+									<span class="text-[10px] text-gray-300 font-medium leading-tight uppercase tracking-wider">Hola,</span>
+									<span class="text-sm font-bold leading-none tracking-wide">{{ user.name }}</span>
+								</div>
+							</div>
+							<div class="relative p-0.5 rounded-full border border-white/30 group-hover:border-white/60 transition-colors">
+								<img :src="`https://res.cloudinary.com/daid9xytm/image/upload/q_auto:good,f_auto,dpr_2.0,c_limit,h_96/v1740248697/user_njnkfl.png`"
+									class="h-8 w-8 rounded-full invert opacity-90 group-hover:opacity-100 transition-opacity" type="image/webp" loading="lazy"
+									alt="Usuario">
+							</div>
 						</NuxtLink>
 					</div>
 					<div class="relative group cursor-pointer">

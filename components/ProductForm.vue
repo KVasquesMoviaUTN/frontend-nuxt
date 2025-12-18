@@ -217,6 +217,9 @@ const handleFileUpload = async (event) => {
 
 	} catch (error) {
 		console.error('Error uploading file:', error);
+		if (error.response) {
+			console.error('Backend error response:', error.response);
+		}
 		uploadError.value = 'Error al subir la imagen. Intente nuevamente.';
 	} finally {
 		uploading.value = false;
