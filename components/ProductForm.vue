@@ -103,6 +103,17 @@
 					v-model="informacion_nutricional" placeholder="Información nutricional del producto..."></textarea>
 			</div>
 
+			<!-- Display Toggle -->
+			<div class="flex items-center space-x-3">
+				<label class="relative inline-flex items-center cursor-pointer">
+					<input type="checkbox" v-model="display" class="sr-only peer">
+					<div
+						class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-secondary/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary">
+					</div>
+					<span class="ml-3 text-sm font-medium text-gray-700">Mostrar en Catálogo</span>
+				</label>
+			</div>
+
 			<div class="flex justify-end pt-4">
 				<button type="submit"
 					class="px-6 py-2.5 bg-primary text-white font-medium rounded-lg shadow-md hover:bg-primary/90 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2">
@@ -146,6 +157,7 @@ const unidad_venta = ref('');
 const unidad = ref('');
 const category = ref('');
 const informacion_nutricional = ref('');
+const display = ref(false);
 const categories = ref([
 	"Aceites y Salsas",
 	"Bebidas",
@@ -182,6 +194,7 @@ function resetForm() {
 	unidad.value = '';
 	category.value = '';
 	informacion_nutricional.value = '';
+	display.value = false;
 	image.value = '';
 	imagePreview.value = null;
 }
@@ -237,6 +250,7 @@ const handleSubmit = async () => {
 		unidad: unidad.value,
 		category: category.value,
 		informacion_nutricional: informacion_nutricional.value,
+		display: display.value,
 		image: image.value,
 	};
 
@@ -279,6 +293,7 @@ watch(() => props.product, (newProduct) => {
 		unidad.value = newProduct.unidad;
 		category.value = newProduct.category || '';
 		informacion_nutricional.value = newProduct.informacion_nutricional || '';
+		display.value = newProduct.display || false;
 		image.value = newProduct.image || '';
 		if (image.value) {
 			imagePreview.value = `https://res.cloudinary.com/daid9xytm/image/upload/q_auto:good,f_auto,dpr_2.0,c_limit,h_224/v1740248697/${image.value}.webp`;

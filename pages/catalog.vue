@@ -29,6 +29,12 @@
 							<span class="text-lg font-bold text-primary">
 								${{ product.price }}
 							</span>
+							<span v-if="!product.display" class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-400">
+								Oculto
+							</span>
+							<span v-else class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-green-400">
+								Visible
+							</span>
 						</div>
 
 						<h3 class="text-xl font-bold text-gray-800 mb-2 line-clamp-1" :title="product.name">{{ product.name }}</h3>
