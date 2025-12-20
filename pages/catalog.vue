@@ -5,6 +5,15 @@
 			<div class="h-1 w-24 bg-secondary rounded-full"></div>
 		</div>
 
+		<div class="mb-8 max-w-md mx-auto relative">
+			<input v-model="searchQuery" @input="handleSearch" type="text" placeholder="Buscar producto por nombre..."
+				class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent shadow-sm">
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none"
+				viewBox="0 0 24 24" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+			</svg>
+		</div>
+
 		<ProductForm :product="productToEdit" @product-saved="fetchProducts" />
 
 		<div v-if="loading" class="flex justify-center py-12">
@@ -122,15 +131,29 @@ const totalPages = ref(1);
 const hasNextPage = ref(false);
 const loading = ref(false);
 
+const searchQuery = ref('');
+let searchTimeout = null;
+
+const handleSearch = () => {
+	if (searchTimeout) clearTimeout(searchTimeout);
+	searchTimeout = setTimeout(() => {
+		page.value = 1;
+		fetchProducts();
+	}, 300);
+};
+
 const fetchProducts = async () => {
 	loading.value = true;
+	console.log('Fetching products with search:', searchQuery.value);
 	try {
 		const response = await $fetch(`${apiBase}/products`, {
 			params: {
 				page: page.value,
-				pageSize: pageSize.value
+				pageSize: pageSize.value,
+				search: searchQuery.value
 			}
 		});
+		console.log('Fetch response:', response);
 
 		if (response.products) {
 			products.value = response.products;

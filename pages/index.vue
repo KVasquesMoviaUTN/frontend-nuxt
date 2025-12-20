@@ -191,15 +191,18 @@ const loadMoreProducts = async () => {
 
 	isLoading.value = true;
 	try {
-		const response = await $fetch(`${apiBase}/products?page=${page.value}`);
-		initializeProductDefaults(response.products);
-		products.value = [...products.value, ...response.products];
+		let hasMore = true;
+		while (hasMore) {
+			const response = await $fetch(`${apiBase}/products?page=${page.value}`);
+			initializeProductDefaults(response.products);
+			products.value = [...products.value, ...response.products];
 
-		// Update pagination state
-		if (!response.hasNextPage) {
-			homeData.value.hasNextPage = false;
-		} else {
-			page.value++;
+			hasMore = response.hasNextPage;
+			if (hasMore) {
+				page.value++;
+			} else {
+				homeData.value.hasNextPage = false;
+			}
 		}
 	} catch (error) {
 		console.error('Error fetching more products:', error);
