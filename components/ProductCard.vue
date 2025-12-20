@@ -139,7 +139,7 @@ export default {
 		},
 
 		getImage(product) {
-			return `https://res.cloudinary.com/daid9xytm/image/upload/q_auto:good,f_auto,dpr_2.0,c_limit,h_224/v1740248697/${product.presentation.length > 0 ? this.localSelectedPresentation.image : product.image
+			return `https://res.cloudinary.com/daid9xytm/image/upload/q_auto:good,f_auto,c_limit,w_300,h_224/v1740248697/${product.presentation.length > 0 ? this.localSelectedPresentation.image : product.image
 				}.webp`;
 		},
 

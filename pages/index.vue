@@ -64,6 +64,14 @@
 			<ProductCard :config="config" :key="product.id" :product="product" @add-to-cart="addToCart" :select-id-prefix="'cantidad'"
 				@update-product="updateProduct" v-for="product in filteredProducts" />
 		</div>
+
+		<div v-if="homeData?.hasNextPage && !inputString" class="flex justify-center mb-16">
+			<button @click="loadMoreProducts" :disabled="isLoading"
+				class="px-8 py-3 rounded-full bg-white border border-primary text-primary font-bold tracking-wide hover:bg-primary hover:text-white transition-all duration-300 shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
+				<span v-if="isLoading" class="animate-spin h-5 w-5 border-2 border-current border-t-transparent rounded-full"></span>
+				<span v-else>Ver más productos</span>
+			</button>
+		</div>
 	</div>
 </template>
 
@@ -176,28 +184,33 @@ if (homeData.value) {
 const config = computed(() => homeData.value?.config || {});
 
 // Client-side pagination (load remaining products)
-onMounted(async () => {
+const page = ref(2); // Start from page 2 since page 1 is SSR'd
+
+const loadMoreProducts = async () => {
+	if (!homeData.value?.hasNextPage || isLoading.value) return;
+
+	isLoading.value = true;
+	try {
+		const response = await $fetch(`${apiBase}/products?page=${page.value}`);
+		initializeProductDefaults(response.products);
+		products.value = [...products.value, ...response.products];
+
+		// Update pagination state
+		if (!response.hasNextPage) {
+			homeData.value.hasNextPage = false;
+		} else {
+			page.value++;
+		}
+	} catch (error) {
+		console.error('Error fetching more products:', error);
+	} finally {
+		isLoading.value = false;
+	}
+};
+
+onMounted(() => {
 	const cartStore = useCartStore();
 	cartStore.initializeCart();
-
-	if (homeData.value?.hasNextPage) {
-		isLoading.value = true;
-		let page = 2;
-		let hasMore = true;
-		try {
-			while (hasMore) {
-				const response = await $fetch(`${apiBase}/products?page=${page}`);
-				initializeProductDefaults(response.products);
-				products.value = [...products.value, ...response.products];
-				hasMore = response.hasNextPage;
-				page++;
-			}
-		} catch (error) {
-			console.error('Error fetching remaining products:', error);
-		} finally {
-			isLoading.value = false;
-		}
-	}
 });
 
 const updateProduct = (updateData) => {

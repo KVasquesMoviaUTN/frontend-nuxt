@@ -1,4 +1,5 @@
 export default defineNuxtRouteMiddleware((to, from) => {
+  if (process.server) return;
   const authStore = useAuthStore();
   
   // Check if user is authenticated
