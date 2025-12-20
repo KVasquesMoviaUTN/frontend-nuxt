@@ -65,13 +65,7 @@
 				@update-product="updateProduct" v-for="product in filteredProducts" />
 		</div>
 
-		<div v-if="homeData?.hasNextPage && !inputString" class="flex justify-center mb-16">
-			<button @click="loadMoreProducts" :disabled="isLoading"
-				class="px-8 py-3 rounded-full bg-white border border-primary text-primary font-bold tracking-wide hover:bg-primary hover:text-white transition-all duration-300 shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
-				<span v-if="isLoading" class="animate-spin h-5 w-5 border-2 border-current border-t-transparent rounded-full"></span>
-				<span v-else>Ver más productos</span>
-			</button>
-		</div>
+
 	</div>
 </template>
 
@@ -214,6 +208,11 @@ const loadMoreProducts = async () => {
 onMounted(() => {
 	const cartStore = useCartStore();
 	cartStore.initializeCart();
+
+	// Auto-load remaining products after initial render
+	setTimeout(() => {
+		loadMoreProducts();
+	}, 100);
 });
 
 const updateProduct = (updateData) => {

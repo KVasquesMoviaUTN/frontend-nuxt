@@ -8,7 +8,7 @@
 					<span class="block text-primary">Sobre Nosotros</span>
 				</h1>
 				<div class="relative rounded-3xl overflow-hidden shadow-2xl max-w-4xl mx-auto aspect-video">
-					<img src="~/assets/store.webp" alt="Local Modo Fit" class="w-full h-full object-cover">
+					<img src="~/assets/store.webp" alt="Local Modo Fit" class="w-full h-full object-cover" loading="lazy" decoding="async">
 					<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end justify-center p-8">
 						<p class="text-white text-xl md:text-2xl font-medium max-w-2xl">
 							"Democratizar la salud, porque estar en forma no debería ser caro ni complicado."

@@ -34,7 +34,7 @@
 						</svg>
 					</div>
 					<h3 class="text-lg font-medium text-gray-900 font-serif">Pago Seguro</h3>
-					<p class="mt-2 text-sm text-gray-500">Tus datos están protegidos. Aceptamos todas las tarjetas.</p>
+					<p class="mt-2 text-sm text-gray-500">Tus datos están protegidos. Aceptamos todos los medios de pago.</p>
 				</div>
 
 				<!-- Feature 4 -->
