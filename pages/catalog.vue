@@ -5,7 +5,7 @@
 			<div class="h-1 w-24 bg-secondary rounded-full"></div>
 		</div>
 
-		<ProductForm :product="productToEdit" @product-saved="fetchProducts" />
+		<ProductForm :product="productToEdit" :parentProduct="parentProductForVariant" @product-saved="fetchProducts" />
 
 		<div class="mb-8 max-w-md mx-auto relative">
 			<input v-model="searchQuery" @input="handleSearch" type="text" placeholder="Buscar producto por nombre..."
@@ -58,6 +58,12 @@
 									d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
 							</svg>
 							Editar
+						</button>
+						<button @click="addVariant(product)" class="text-secondary hover:text-primary font-medium text-sm flex items-center transition-colors">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+							</svg>
+							Variante
 						</button>
 						<button @click="deleteProduct(product.id)"
 							class="text-red-500 hover:text-red-700 font-medium text-sm flex items-center transition-colors">
@@ -131,6 +137,7 @@ const apiBase = configRuntime.public.apiBase;
 
 const products = ref([]);
 const productToEdit = ref(null);
+const parentProductForVariant = ref(null);
 const page = ref(1);
 const pageSize = ref(9);
 const totalPages = ref(1);
@@ -177,6 +184,13 @@ const fetchProducts = async () => {
 
 const editProduct = (product) => {
 	productToEdit.value = { ...product };
+	parentProductForVariant.value = null;
+	window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+const addVariant = (product) => {
+	productToEdit.value = null;
+	parentProductForVariant.value = { ...product };
 	window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
