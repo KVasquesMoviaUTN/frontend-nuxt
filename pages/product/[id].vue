@@ -75,7 +75,16 @@ const { data: pageData } = await useAsyncData(`product-${route.params.id}`, asyn
 	// Initialize product defaults
 	const product = productRes;
 	product.selectedQuantity = 1;
-	product.selectedPresentation = product.presentation.length > 0 ? product.presentation[0] : null;
+
+	// Prioritize presentations with stock and image
+	if (product.presentation.length > 0) {
+		product.selectedPresentation = product.presentation.find(p => p.stock > 0 && p.image)
+			|| product.presentation.find(p => p.stock > 0)
+			|| product.presentation.find(p => p.image)
+			|| product.presentation[0];
+	} else {
+		product.selectedPresentation = null;
+	}
 	product.presentation.forEach(presentation => {
 		presentation.selectedQuantity = 1;
 	});
