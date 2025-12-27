@@ -282,6 +282,11 @@ const selectParentProduct = (product) => {
 	selectedParentProduct.value = product;
 	parentSearchResults.value = [];
 	searchParentQuery.value = '';
+	name.value = product.name; // Default name to parent product name
+	description.value = product.description || '';
+	informacion_nutricional.value = product.informacion_nutricional || '';
+	price.value = product.price;
+	stock.value = product.stock;
 };
 
 function resetForm() {
@@ -456,6 +461,11 @@ watch(() => props.parentProduct, (newParent) => {
 		resetForm();
 		isVariant.value = true;
 		selectedParentProduct.value = newParent;
+		name.value = newParent.name; // Default name to parent product name
+		description.value = newParent.description || '';
+		informacion_nutricional.value = newParent.informacion_nutricional || '';
+		price.value = newParent.price;
+		stock.value = newParent.stock;
 	}
 }, { immediate: true });
 </script>
