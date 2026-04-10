@@ -2,21 +2,14 @@
 	<header
 		class="flex flex-col items-center bg-primary/90 backdrop-blur-md sticky top-0 z-50 w-full h-20 text-lg shadow-lg transition-all duration-300">
 		<!-- class="flex flex-col items-center bg-primary/98 backdrop-blur-md sticky top-0 z-50 w-full h-20 text-lg shadow-lg transition-all duration-300"> -->
-		<div class="absolute top-0 left-0 w-full h-4 z-[60] flex justify-between px-1 pointer-events-none overflow-hidden">
-			<div v-for="n in 40" :key="n" class="w-2 h-2 rounded-full shadow-md animate-twinkle" :class="[
-				n % 2 === 0 ? 'bg-accent' : 'bg-secondary',
-				n % 3 === 0 ? 'delay-700' : ''
-			]" :style="{ marginTop: (n % 2 === 0 ? '2px' : '6px') }">
-			</div>
-		</div>
+
 		<div class="flex h-20 items-center w-full justify-between px-4 relative max-w-7xl mx-auto">
 			<div class="flex items-center relative">
 				<NuxtLink to="/" class="flex" @click="resetInput">
 					<img :src="`https://res.cloudinary.com/daid9xytm/image/upload/q_auto:good,f_auto,dpr_2.0,c_limit,h_160/v1740248697/modofit.webp`"
 						type="image/webp" loading="lazy" alt="Logo de Modo Fit"
 						class="flex h-12 w-12 lg:h-14 lg:w-14 border-2 border-secondary rounded-full relative z-10">
-					<img src="~/assets/santa_hat2.png" alt="Santa Hat"
-						class="absolute -top-3 -left-2 w-7 h-7 z-20 transform -rotate-[25deg] pointer-events-none">
+
 				</NuxtLink>
 			</div>
 			<div class="flex justify-center relative flex-1 mx-4 lg:mx-10">
