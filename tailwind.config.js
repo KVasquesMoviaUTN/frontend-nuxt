@@ -11,11 +11,11 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				primary: '#165B33', // Christmas Green
-				accent: '#D42426', // Christmas Red
-				secondary: '#d4af37', // Gold/Bronze
-				background: '#f9f9f7', // Off-white/Cream
-				text: '#2d2d2d', // Dark Charcoal
+				primary: '#064e3b', // Elegant Dark Emerald
+				accent: '#10b981', // Energetic Emerald
+				secondary: '#eab308', // Modern Gold/Yellow
+				background: '#f8fafc', // Crisp Slate 50
+				text: '#1e293b', // Slate 800
 				'feta': {
 					'50': '#f4fdec',
 					'100': '#e1f9ce',

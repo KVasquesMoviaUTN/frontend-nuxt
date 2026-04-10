@@ -16,7 +16,7 @@
 				<div class="relative w-full max-w-2xl">
 					<input v-model="inputString" placeholder="Buscar productos..." @keyup.enter="redirectToHome" @focus="showSuggestions = true"
 						@blur="hideSuggestions"
-						class="w-full pl-4 pr-10 h-10 lg:h-12 bg-white/10 border border-secondary/30 text-white placeholder:text-gray-300 text-base rounded-full focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:bg-white/20 focus:shadow-[0_0_15px_rgba(212,175,55,0.3)] transition-all duration-300">
+						class="w-full pl-4 pr-10 h-10 lg:h-12 bg-white/10 border border-secondary/30 text-white placeholder:text-gray-300 text-base rounded-full focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:bg-white/20 focus:shadow-[0_0_15px_rgba(234,179,8,0.3)] transition-all duration-300">
 					<img src="~/assets/lens.svg" class="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 lg:h-5 lg:w-5 opacity-70 invert" alt="lens">
 				</div>
 
@@ -33,11 +33,15 @@
 			<div class="flex items-center gap-4">
 				<ClientOnly>
 					<div class="flex flex-row items-center text-white font-medium">
+						<NuxtLink v-if="user && user.role === 'admin'" to="/admin/products"
+							class="mr-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 hover:border-white/40 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all duration-300 text-sm font-medium hidden lg:block">
+							Añadir Producto
+						</NuxtLink>
 						<NuxtLink v-if="user && user.role === 'admin'" to="/admin/sales"
 							class="mr-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 hover:border-white/40 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all duration-300 text-sm font-medium hidden lg:block">
 							Registrar Venta
 						</NuxtLink>
-						<NuxtLink v-if="user && user.role === 'admin'" to="/admin/statistics"
+						<NuxtLink v-if="user && (user.role === 'admin' || user.role === 'statistics')" to="/admin/statistics"
 							class="mr-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 hover:border-white/40 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all duration-300 text-sm font-medium hidden lg:block">
 							Mostrar Estadísticas
 						</NuxtLink>

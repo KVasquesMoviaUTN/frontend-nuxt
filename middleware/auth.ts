@@ -26,6 +26,18 @@ export default defineNuxtRouteMiddleware((to, from) => {
     }
   }
 
+  // Statistics access
+  if (role === 'statistics') {
+    // Allowed routes for statistics role
+    if (to.path === '/admin/statistics') {
+      return;
+    }
+    // Block other admin/catalog routes
+    if (to.path.startsWith('/admin') || to.path === '/catalog') {
+      return navigateTo('/');
+    }
+  }
+
   // Default: Block restricted routes for non-privileged users
   if (to.path.startsWith('/admin') || to.path === '/catalog') {
     return navigateTo('/');
