@@ -76,14 +76,20 @@ import 'swiper/css';
 import { useParamsStore } from '~/stores/params';
 import { useCartStore } from '~/stores/cart';
 
-useHead({
+useSeoMeta({
 	title: 'Catálogo de Productos | Modo Fit',
-	meta: [
-		{ name: 'description', content: 'Descubrí los mejores productos naturales al mejor precio.' },
-		{ name: 'keywords', content: 'tienda fitness, suplementos, salud, nutrición, gimnasio, dietética' },
-		{ property: 'og:title', content: 'Modo Fit - Catálogo de Productos' },
-		{ property: 'og:description', content: 'Catálogo con los mejores suplementos al mejor precio.' }
-	],
+	ogTitle: 'Modo Fit - Catálogo de Productos',
+	description: 'Descubrí los mejores productos naturales y suplementos deportivos al mejor precio. Compra proteínas, creatinas y accesorios fitness.',
+	ogDescription: 'Catálogo con los mejores suplementos al mejor precio. Compra proteínas, creatinas y más con envío a todo el país.',
+	ogImage: 'https://modofit.shop/favicon.png', // Or another appropriate OG image URL
+	twitterCard: 'summary_large_image',
+	twitterTitle: 'Catálogo de Productos | Modo Fit',
+	twitterDescription: 'Descubrí los mejores productos naturales y suplementos deportivos al mejor precio.',
+	twitterImage: 'https://modofit.shop/favicon.png',
+	keywords: 'tienda fitness, suplementos, salud, nutrición, gimnasio, dietética, proteínas, creatinas, preentrenos'
+})
+
+useHead({
 	script: [
 		{
 			type: 'application/ld+json',

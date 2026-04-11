@@ -99,26 +99,20 @@ const product = ref(pageData.value?.product || null);
 const config = ref(pageData.value?.config || {});
 
 // SEO
-useHead({
+useSeoMeta({
 	title: () => product.value?.name ? `${product.value.name} | Modo Fit` : 'Producto | Modo Fit',
-	meta: [
-		{
-			name: 'description',
-			content: () => product.value?.description || 'Detalles del producto en Modo Fit.',
-		},
-		{
-			property: 'og:title',
-			content: () => product.value?.name ? `${product.value.name} | Modo Fit` : 'Producto | Modo Fit',
-		},
-		{
-			property: 'og:description',
-			content: () => product.value?.description || 'Detalles del producto en Modo Fit.',
-		},
-		{
-			property: 'og:image',
-			content: () => product.value?.image ? getImage(product.value) : '',
-		},
-	],
+	ogTitle: () => product.value?.name ? `${product.value.name} | Modo Fit` : 'Producto | Modo Fit',
+	description: () => product.value?.description || 'Detalles del producto en Modo Fit.',
+	ogDescription: () => product.value?.description || 'Detalles del producto en Modo Fit.',
+	ogImage: () => product.value?.image ? getImage(product.value) : '',
+	twitterCard: 'summary_large_image',
+	twitterTitle: () => product.value?.name ? `${product.value.name} | Modo Fit` : 'Producto | Modo Fit',
+	twitterDescription: () => product.value?.description || 'Detalles del producto en Modo Fit.',
+	twitterImage: () => product.value?.image ? getImage(product.value) : '',
+})
+
+// Schema SEO
+useHead({
 	script: [
 		{
 			type: 'application/ld+json',
