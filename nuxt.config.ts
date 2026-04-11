@@ -5,7 +5,11 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
+    'nuxt-gtag'
   ],
+  gtag: {
+    id: 'G-YZ7EDV3NNV',
+  },
   css: [
     '@/assets/css/tailwind.css',
     '@fortawesome/fontawesome-svg-core/styles.css'
@@ -24,20 +28,6 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicon.png' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap' }
-      ],
-      script: [
-        {
-          src: 'https://www.googletagmanager.com/gtag/js?id=G-YZ7EDV3NNV',
-          async: true
-        },
-        {
-          children: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-YZ7EDV3NNV');
-          `
-        }
       ]
     },
   },
