@@ -261,19 +261,19 @@
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
 					<!-- Red Card -->
 					<div class="bg-red-100 p-6 rounded-lg shadow-md border-l-4 border-red-500">
-						<h3 class="text-lg font-semibold text-red-700 mb-2">Crítico (≤ 5)</h3>
+						<h3 class="text-lg font-semibold text-red-700 mb-2">Crítico (≤ 7 días)</h3>
 						<p class="text-4xl font-bold text-red-800">{{ statistics.stockSemaphore.red }}</p>
 						<p class="text-sm text-red-600 mt-1">Productos</p>
 					</div>
 					<!-- Yellow Card -->
 					<div class="bg-yellow-100 p-6 rounded-lg shadow-md border-l-4 border-yellow-500">
-						<h3 class="text-lg font-semibold text-yellow-700 mb-2">Alerta (6 - 20)</h3>
+						<h3 class="text-lg font-semibold text-yellow-700 mb-2">Alerta (8 - 30 días)</h3>
 						<p class="text-4xl font-bold text-yellow-800">{{ statistics.stockSemaphore.yellow }}</p>
 						<p class="text-sm text-yellow-600 mt-1">Productos</p>
 					</div>
 					<!-- Green Card -->
 					<div class="bg-green-100 p-6 rounded-lg shadow-md border-l-4 border-green-500">
-						<h3 class="text-lg font-semibold text-green-700 mb-2">Normal (> 20)</h3>
+						<h3 class="text-lg font-semibold text-green-700 mb-2">Sano (> 30 días)</h3>
 						<p class="text-4xl font-bold text-green-800">{{ statistics.stockSemaphore.green }}</p>
 						<p class="text-sm text-green-600 mt-1">Productos</p>
 					</div>
@@ -288,6 +288,7 @@
 								<tr class="bg-red-50 text-red-700 uppercase text-sm leading-normal">
 									<th class="py-3 px-6 text-left">Producto</th>
 									<th class="py-3 px-6 text-right">Stock Actual</th>
+									<th class="py-3 px-6 text-right">Inventario Restante</th>
 								</tr>
 							</thead>
 							<tbody class="text-gray-600 text-sm font-light">
@@ -295,6 +296,9 @@
 									class="border-b border-gray-200 hover:bg-red-50">
 									<td class="py-3 px-6 text-left font-medium">{{ product.name }}</td>
 									<td class="py-3 px-6 text-right font-bold text-red-600">{{ product.stock }}</td>
+									<td class="py-3 px-6 text-right font-bold" :class="product.daysRemaining <= 7 ? 'text-red-600' : 'text-yellow-600'">
+										{{ product.daysRemaining === null ? '∞' : (product.daysRemaining > 365 ? '+1 Año' : product.daysRemaining + ' días') }}
+									</td>
 								</tr>
 							</tbody>
 						</table>
